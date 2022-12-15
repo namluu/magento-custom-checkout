@@ -1,7 +1,16 @@
 <li id="customer-details-step" data-bind="fadeVisible: isVisible">
     <div id="customer-details" class="step-content" data-role="content">
-        <div data-bind="i18n: '1. Your details'" data-role="title"></div>
+        <div data-bind="i18n: '1. Your details'" data-role="title" class="step-title"></div>
+        
+        <each args="getRegion('customer-email')" render="" ></each>
+        
         <form data-bind="submit: navigateToNextStep" novalidate="novalidate">
+            <div id="customer-details-fieldset" class="fieldset address">
+                <!-- ko foreach: getRegion('customer-details-fieldset') -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+                <!--/ko-->
+            </div>
+            
             <div class="actions-toolbar">
                 <div class="primary">
                     <button data-role="opc-continue" type="submit" class="button action continue primary">
