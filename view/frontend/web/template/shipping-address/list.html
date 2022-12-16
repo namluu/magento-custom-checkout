@@ -1,0 +1,23 @@
+list
+
+
+<!-- ko if: (visible)-->
+<div class="field addresses">
+    <div class="control">
+        <div class="">
+            <!-- ko foreach: { data: elems, as: 'element' } -->
+            <!-- ko template: element.getTemplate() --><!-- /ko -->
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
+<!-- /ko -->
+<!-- ko if: (visibleGuest)-->
+<div class="field addresses">
+    <div class="control">
+        <div class="">
+            <!-- ko template: 'Lounge_CheckoutRedesign/shipping-address/address-renderer/default' --><!-- /ko -->
+        </div>
+    </div>
+</div>
+<!-- /ko -->
