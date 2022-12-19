@@ -27,12 +27,12 @@ define([
                 city: 'checkout.steps.customer-details-step.customer-details-area.customer-details-fieldset.city:value',
                 region: 'checkout.steps.customer-details-step.customer-details-area.customer-details-fieldset.region_id:value',
                 postcode: 'checkout.steps.customer-details-step.customer-details-area.customer-details-fieldset.postcode:value',
-                telephone: 'checkout.steps.customer-details-step.customer-details-area.customer-details-fieldset.telephone:value'
+                telephoneNew: 'checkout.steps.customer-details-step.customer-details-area.customer-details-fieldset.telephone:value'
             }
         },
 
         initObservable: function () {
-            this._super().observe('firstname lastname street city region postcode telephone');
+            this._super().observe('firstname lastname street city region postcode telephoneNew');
             return this;
         },
 
@@ -45,8 +45,7 @@ define([
         },
 
         telephone: function() {
-            //return this.telephone();
-            return '...'
+            return this.telephoneNew(); // avoid issue Maximum call stack size exceeded
         },
 
         guestEmail: function() {
