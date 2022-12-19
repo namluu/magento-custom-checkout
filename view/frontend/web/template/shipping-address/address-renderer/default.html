@@ -1,1 +1,9 @@
-default
+<div>
+    <div translate="'1. Your details'"></div>
+    <div data-bind="text: fullName()" ></div>
+    <div data-bind="text: shippingAddress()"></div>
+    <div data-bind="text: 'Telephone:' + ' ' + telephone()"></div>
+    <div data-bind="text: 'Email:' + ' ' + guestEmail()"></div>
+
+    <a data-bind="i18n: 'Edit', attr: {href: checkoutConfig.checkoutUrl}"></a>
+</div>

@@ -1,16 +1,12 @@
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
-
 define([
     'ko',
     'underscore',
     'mageUtils',
     'uiLayout',
     'Magento_Checkout/js/view/shipping-address/list',
-    'Magento_Customer/js/model/address-list'
-], function (ko, _, utils, layout, ListView, addressList) {
+    'Magento_Customer/js/model/address-list',
+    'Magento_Checkout/js/checkout-data'
+], function (ko, _, utils, layout, ListView, addressList, checkoutData) {
     'use strict';
 
     var defaultRendererTemplate = {
@@ -24,14 +20,37 @@ define([
         defaults: {
             template: 'Lounge_CheckoutRedesign/shipping-address/list',
             visible: addressList().length > 0,
-            visibleGuest: addressList().length == 0
+            imports: {
+                firstname: 'checkout.steps.customer-details-step.customer-details-area.customer-details-fieldset.firstname:value',
+                lastname: 'checkout.steps.customer-details-step.customer-details-area.customer-details-fieldset.lastname:value',
+                street: 'checkout.steps.customer-details-step.customer-details-area.customer-details-fieldset.street:value',
+                city: 'checkout.steps.customer-details-step.customer-details-area.customer-details-fieldset.city:value',
+                region: 'checkout.steps.customer-details-step.customer-details-area.customer-details-fieldset.region_id:value',
+                postcode: 'checkout.steps.customer-details-step.customer-details-area.customer-details-fieldset.postcode:value',
+                telephone: 'checkout.steps.customer-details-step.customer-details-area.customer-details-fieldset.telephone:value'
+            }
         },
 
-        /** @inheritdoc */
-        initChildren: function () {
-            
-
+        initObservable: function () {
+            this._super().observe('firstname lastname street city region postcode telephone');
             return this;
+        },
+
+        fullName:function () {
+            return this.firstname() + ' ' + this.lastname();
+        },
+
+        shippingAddress: function() {
+            return this.street() + ' ' + this.city() + ', ' + this.region() + ', ' + this.postcode();
+        },
+
+        telephone: function() {
+            //return this.telephone();
+            return '...'
+        },
+
+        guestEmail: function() {
+            return checkoutData.getInputFieldEmailValue();
         }
     });
 });
